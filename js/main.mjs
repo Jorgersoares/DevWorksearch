@@ -19,7 +19,7 @@ banner_btn.addEventListener('click', () => {
 brand.addEventListener('click', () => {
     banner_img.classList.remove('d-none')
     search_area.classList.add('d-none')
-    html.style.overflowY = "hidden"
+    html.style.overflowY = "scroll"
 })
 
 // Chamada da API
