@@ -1,11 +1,26 @@
+@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css?family=Blinker&display=swap');
+
 html {
-    overflow-y: scroll
+    scroll-behavior: smooth;
+    overflow-y: hidden
 }
 
 body {
     font-family: 'Blinker', sans-serif;
+    animation: 1.5s init;
 }
+
+@keyframes init {
+    0% {
+        opacity: 0;
+    }   
+
+    100% {
+        opacity: 1;
+    }
+}
+
 /* MAIN BANNER */
 #banner-img {
     background-image: url(../img/banner1.jpg);
@@ -31,11 +46,13 @@ body {
 }
 
 /* SEARCH AREA */
+
 #search-area{
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 @media(min-width: 1024px) {
     #search-area {
         width: 900px;
@@ -43,6 +60,7 @@ body {
 }
 
 /* CARD AREA */
+
 .card-e {
     display: flex;
     flex-wrap: wrap;
@@ -57,11 +75,12 @@ body {
     border-radius: 8px;
     margin-top: 20px;
 }
+
 .logo {
     max-width: 174px;
     max-height: 90px;
 }
+
 .div-logo{
     height: 100px;
 }
-
