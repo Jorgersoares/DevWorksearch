@@ -96,26 +96,31 @@ function addLocation(json) {
 
 function filterLocation(json) {
 
-    let cards = Array.from(document.querySelectorAll('#card'))
+    function showAll(){
+        let cards = Array.from(document.querySelectorAll('#card'))
+        cards.map(card => {
+            card.classList.remove('d-none')
+            card.classList.add('d-flex')
+        })
+    }
+
 
     choice_location.addEventListener("change", () => {
         event.preventDefault()
         if (choice_location.value == "All") {
 
-            cards.map(card => {
-                card.classList.remove('d-none')
-                card.classList.add('d-flex')
-            })
+            showAll()
         }
         else {
+            showAll()
             json.map(key => {
-                if (key.location != choice_location.value && choice_location.value != "None") {
+                if (key.location != choice_location.value && choice_location.value != "None" && choice_location.value != "Filtrar...") {
                     let div_card = document.querySelector('#E' + key._id).parentNode
                     div_card.classList.remove('d-flex')
                     div_card.classList.add('d-none')
                 }
             })
-
+   
         }
     })
 
