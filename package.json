@@ -1,0 +1,13 @@
+{
+  "name": "projectjs",
+  "version": "1.0.0",
+  "main": "./js/main.mjs",
+  "license": "MIT",
+  "scripts": {
+    "build": "npx webpack"
+  },
+  "devDependencies": {
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.6"
+  }
+}
