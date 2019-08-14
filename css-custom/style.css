@@ -6,7 +6,6 @@ html {
 body {
     font-family: 'Blinker', sans-serif;
 }
-
 /* MAIN BANNER */
 #banner-img {
     background-image: url(../img/banner1.jpg);
@@ -65,3 +64,4 @@ body {
 .div-logo{
     height: 100px;
 }
+
