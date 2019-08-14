@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Blinker&display=swap');
 html {
-    overflow-y: hidden
+    overflow-y: scroll
 }
 
 body {
