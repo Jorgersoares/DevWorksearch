@@ -2,16 +2,15 @@
 @import url('https://fonts.googleapis.com/css?family=Blinker&display=swap');
 
 html {
-<<<<<<< HEAD
-    overflow-y: scroll
-=======
+
     overflow-y: scroll;
->>>>>>> bbeb508fc2b3c85cc6bb7b7811144df0d8421aa3
+
 }
 
 body {
     font-family: 'Blinker', sans-serif;
     animation: 1.5s init;
+
 }
 
 @keyframes init {
