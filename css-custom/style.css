@@ -2,12 +2,15 @@
 @import url('https://fonts.googleapis.com/css?family=Blinker&display=swap');
 
 html {
+
     overflow-y: scroll;
+
 }
 
 body {
     font-family: 'Blinker', sans-serif;
     animation: 1.5s init;
+
 }
 
 @keyframes init {
@@ -19,7 +22,6 @@ body {
         opacity: 1;
     }
 }
-
 /* MAIN BANNER */
 #banner-img {
     background-image: url(../img/banner1.jpg);
@@ -78,3 +80,4 @@ body {
 .div-logo{
     height: 100px;
 }
+
