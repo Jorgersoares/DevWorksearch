@@ -7,14 +7,13 @@ let choice_location = document.querySelector('#choice-location')
 let brand = document.querySelector('.navbar-brand')
 let html = document.querySelector('html')
 
-
+import api from './api.mjs'
 
 //Home
 banner_btn.addEventListener('click', () => {
     banner_img.classList.add('d-none')
     search_area.classList.remove('d-none')
     html.style.overflowY = "scroll"
-
 })
 
 brand.addEventListener('click', () => {
@@ -23,25 +22,15 @@ brand.addEventListener('click', () => {
     html.style.overflowY = "scroll"
 })
 
-
-//Requisição
+// Chamada da API
 async function fetchAPI(url) {
-    try {
-        const response = await fetch(url)
-        const json = await response.json()
-        addCity(json)
-
-    }
-    catch (error) {
-        console.log(error)
-    }
+    const json = await api(url);
+    addCity(json);
 }
 
-// Chamada da API
-fetchAPI("https://project-js-api.herokuapp.com/api/get")
+fetchAPI("https://project-js-api.herokuapp.com/api/get");
 
 function addCity(json) {
-
     let city_arr = []
     json.map(key => {
         city_arr.push(key.city)
@@ -55,7 +44,6 @@ function addCity(json) {
 }
 
 function filterCity(json) {
-
     choice_city.addEventListener("change", () => {
         event.preventDefault()
         if (choice_city.value === "None") {
@@ -66,13 +54,12 @@ function filterCity(json) {
             let json_filter = json.filter(i => i.city === choice_city.value)
             exibeEmpresas(json_filter)
             addLocation(json_filter)
-
         }
     })
 }
 function addLocation(json) {
 
-    location_arr = []
+    const location_arr = []
 
     choice_location.innerHTML = ""
 
@@ -82,7 +69,8 @@ function addLocation(json) {
     json.map(key => {
         location_arr.push(key.location)
     })
-    set_location_arr = Array.from(new Set(location_arr))
+    
+    const set_location_arr = Array.from(new Set(location_arr))
 
     set_location_arr.map(i => {
         choice_location.insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`)
@@ -91,7 +79,6 @@ function addLocation(json) {
     choice_location.classList.remove('d-none')
 
     filterLocation(json)
-
 }
 
 function filterLocation(json) {
@@ -108,7 +95,6 @@ function filterLocation(json) {
     choice_location.addEventListener("change", () => {
         event.preventDefault()
         if (choice_location.value == "All") {
-
             showAll()
         }
         else {
