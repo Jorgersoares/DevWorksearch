@@ -6,7 +6,6 @@ let card_area = document.querySelector('#grid-cards')
 let choice_location = document.querySelector('#choice-location')
 let brand = document.querySelector('.navbar-brand')
 let html = document.querySelector('html')
-
 import api from './api.mjs'
 
 //Home
@@ -23,27 +22,27 @@ brand.addEventListener('click', () => {
 })
 
 // Chamada da API
-async function fetchAPI(url) {
-    const json = await api(url);
-    addCity(json);
-}
+const res = api("https://project-js-api.herokuapp.com/api/get")
+res.then(data => {
+    addCity(data)
+})
 
-fetchAPI("https://project-js-api.herokuapp.com/api/get");
-
+//Adicionando as cidades no componente combo box
 function addCity(json) {
-    let city_arr = []
-    json.map(key => {
-        city_arr.push(key.city)
-    })
-    let set_city_arr = Array.from(new Set(city_arr))
+    let city_list = []
 
-    set_city_arr.map(i => {
+    json.map(key => {
+        city_list.push(key.city)
+    })
+
+    //Cidades distintas
+    let set_city_list = Array.from(new Set(city_list))
+
+    //adicionando no componente da interface
+    set_city_list.map(i => {
         choice_city.insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`)
     })
-    filterCity(json)
-}
-
-function filterCity(json) {
+    
     choice_city.addEventListener("change", () => {
         event.preventDefault()
         if (choice_city.value === "None") {
@@ -51,46 +50,45 @@ function filterCity(json) {
             choice_location.classList.add('d-none')
         }
         else {
-            let json_filter = json.filter(i => i.city === choice_city.value)
-            exibeEmpresas(json_filter)
-            addLocation(json_filter)
+            choice_location.classList.remove('d-none')
+            //Renderiza em tela as empresa da cidade escolhida
+            exibeEmpresas(choice_city.value,json)
+            //adiciona filtro por bairro
+            addLocation(choice_city.value, json)
         }
     })
 }
-function addLocation(json) {
 
-    const location_arr = []
+function addLocation(city,json) {
+
+    const location_list = []
 
     choice_location.innerHTML = ""
-
-    choice_location.insertAdjacentHTML('beforeend', '<option selected>Filtrar...</option>')
+    choice_location.insertAdjacentHTML('beforeend', '<option value="" disabled selected hidden>Filtrar por bairro...</option>')
     choice_location.insertAdjacentHTML('beforeend', '<option>All</option>')
 
     json.map(key => {
-        location_arr.push(key.location)
+        if(key.city == city)
+            location_list.push(key.location)
     })
-    
-    const set_location_arr = Array.from(new Set(location_arr))
 
+    //Bairros distintos
+    const set_location_arr = Array.from(new Set(location_list))
     set_location_arr.map(i => {
         choice_location.insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`)
     })
-
+    
+    //exibe o componente para filtrar
     choice_location.classList.remove('d-none')
 
-    filterLocation(json)
-}
-
-function filterLocation(json) {
-
-    function showAll(){
+    //Funcao para resetar a exibicao original dos cards das empresas
+    function showAll() {
         let cards = Array.from(document.querySelectorAll('#card'))
         cards.map(card => {
             card.classList.remove('d-none')
             card.classList.add('d-flex')
         })
     }
-
 
     choice_location.addEventListener("change", () => {
         event.preventDefault()
@@ -106,18 +104,18 @@ function filterLocation(json) {
                     div_card.classList.add('d-none')
                 }
             })
-   
+
         }
     })
-
 }
 
-function exibeEmpresas(json) {
+function exibeEmpresas(city,json) {
     card_area.innerHTML = ""
+    //Adiciona os cards em tela
     json.map(key => {
-        card_area.insertAdjacentHTML('beforeend',
-
-            `<div class="col-md-4 d-flex justify-content-center" id="card">
+        if(key.city == city)
+            card_area.insertAdjacentHTML('beforeend',
+                `<div class="col-md-4 d-flex justify-content-center" id="card">
         <div class="card-e" id="E${key._id}">
             <div class="div-logo">
             <img src="logo/${key.logo}" alt="" class="logo">
@@ -154,6 +152,6 @@ function exibeEmpresas(json) {
         </div>
     </div>`
 
-        )
+            )
     })
 }

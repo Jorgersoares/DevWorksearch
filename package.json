@@ -1,14 +1,25 @@
 {
-  "name": "projectjs",
+  "name": "DevWorksearch",
   "version": "1.0.0",
-  "main": "./js/main.mjs",
-  "license": "MIT",
+  "description": "### Grupo: - Adilson da Silva Costa Júnior - Adrianderson Oliveira de Souza Lira - Jorge Ricardo Soares",
+  "main": "index.js",
   "scripts": {
-    "build": "npx webpack"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-dev" : "npx webpack js/main.mjs --mode development"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jorgersoares/DevWorksearch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jorgersoares/DevWorksearch/issues"
+  },
+  "homepage": "https://github.com/Jorgersoares/DevWorksearch#readme",
   "devDependencies": {
-    "babel-minify-webpack-plugin": "^0.3.1",
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.6"
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   }
 }
