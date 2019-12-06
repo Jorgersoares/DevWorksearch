@@ -3,28 +3,37 @@ let banner_btn = document.querySelector('button#banner-btn')
 let search_area = document.querySelector('div#search-area')
 let brand = document.querySelector('.navbar-brand')
 let html = document.querySelector('html')
-import api from './api.mjs'
-import addCity from './add_cidades.mjs'
 
-//Home
+import api from './api.mjs'
+import { cidades_select, filtro_cidade } from './cidades.mjs'
+
+//Irá exibir a tela de interação com o usuário
 banner_btn.addEventListener('click', () => {
     banner_img.classList.add('d-none')
     search_area.classList.remove('d-none')
     html.style.overflowY = "scroll"
 })
 
-//Logo
+//Volta para o banner inicial do site
 brand.addEventListener('click', () => {
     banner_img.classList.remove('d-none')
     search_area.classList.add('d-none')
     html.style.overflowY = "scroll"
 })
 
-// Chamada da API
-const res = api("https://project-js-api.herokuapp.com/api/get")
-res.then(data => {
-    //Chama função para adicionar as cidades para pesquisar empresas
-    addCity(data)
-})
+//Chamada da API
+api().then(
+    data => {
+        //Função que adiciona as opções de cidade no componente
+        cidades_select(data)
+
+        //Função que mostra as empresas de acordo com a cidade escolhida
+        filtro_cidade(data)
+
+    }, erro => {
+        console.log(erro)
+    }
+)
+
 
 

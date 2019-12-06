@@ -1,7 +1,8 @@
-// Chamada da API
-export default async function api(rota){
+const ENDPOINT = "https://project-js-api.herokuapp.com/api/get"
+
+export default async function api() {
     try {
-        const response = await fetch(rota)
+        const response = await fetch(ENDPOINT)
         return await response.json()
     }
     catch (error) {
